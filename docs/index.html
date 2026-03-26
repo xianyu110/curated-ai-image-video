@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curated AI Image & Video Tools - Searchable Directory</title>
+    <meta name="description" content="A searchable directory of the best AI-powered image and video generation tools, models, and APIs.">
+    <meta property="og:title" content="Curated AI Image & Video Tools">
+    <meta property="og:description" content="Discover 90+ AI tools for image generation, video creation, editing, and more.">
+    <meta property="og:type" content="website">
+    <style>
+        :root {
+            --bg-primary: #0f0c29;
+            --bg-secondary: #1a1a3e;
+            --bg-card: #1e1e42;
+            --text-primary: #e8e8f0;
+            --text-secondary: #a0a0c0;
+            --accent-pink: #f093fb;
+            --accent-red: #f5576c;
+            --accent-blue: #4facfe;
+            --accent-teal: #a8edea;
+            --accent-peach: #fed6e3;
+            --border: #2d2d5e;
+            --ssemble-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            padding: 60px 20px 40px;
+            text-align: center;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #f093fb, #f5576c, #4facfe) 1;
+        }
+
+        .hero h1 {
+            font-size: 2.8em;
+            font-weight: 800;
+            background: linear-gradient(90deg, #a8edea, #fed6e3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .hero-badges a img { height: 22px; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Featured Section */
+        .featured-section {
+            padding: 40px 20px;
+            background: linear-gradient(180deg, rgba(102,126,234,0.08) 0%, transparent 100%);
+        }
+
+        .featured-card {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 2px solid #667eea;
+            border-radius: 16px;
+            padding: 32px;
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-card::before {
+            content: 'FEATURED';
+            position: absolute;
+            top: 16px;
+            right: -30px;
+            background: var(--ssemble-gradient);
+            color: white;
+            padding: 4px 40px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transform: rotate(45deg);
+        }
+
+        .featured-logo {
+            flex-shrink: 0;
+            width: 100px;
+            height: 100px;
+            background: var(--ssemble-gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: 900;
+            color: white;
+        }
+
+        .featured-content h2 {
+            font-size: 1.6em;
+            margin-bottom: 8px;
+        }
+
+        .featured-content h2 a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .featured-content h2 a:hover { color: #667eea; }
+
+        .featured-content p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 1.05em;
+        }
+
+        .featured-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .featured-tags span {
+            background: rgba(102,126,234,0.15);
+            color: #667eea;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .featured-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .featured-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--ssemble-gradient);
+            color: white;
+        }
+
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102,126,234,0.4); }
+
+        .btn-secondary {
+            background: rgba(102,126,234,0.1);
+            color: #667eea;
+            border: 1px solid rgba(102,126,234,0.3);
+        }
+
+        .btn-secondary:hover { background: rgba(102,126,234,0.2); }
+
+        /* Search and Filters */
+        .controls {
+            padding: 30px 20px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .controls-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 14px 20px 14px 48px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1.05em;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-box:focus { border-color: var(--accent-blue); }
+
+        .search-wrapper {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 1.2em;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: 6px 16px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+        .filter-btn.active { background: var(--accent-blue); color: #0f0c29; border-color: var(--accent-blue); font-weight: 600; }
+
+        .result-count {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        /* Tools Grid */
+        .tools-section { padding: 30px 20px; }
+
+        .category-header {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 30px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-header .cat-icon {
+            font-size: 0.8em;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .tool-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
+        .tool-card.ssemble-card {
+            border-color: #667eea;
+            background: linear-gradient(135deg, rgba(102,126,234,0.08), rgba(118,75,162,0.08));
+        }
+
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .tool-name {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .tool-pricing {
+            font-size: 0.8em;
+            color: var(--accent-teal);
+            background: rgba(168,237,234,0.1);
+            padding: 2px 10px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+
+        .tool-desc {
+            color: var(--text-secondary);
+            font-size: 0.92em;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .tool-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tool-links a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 0.85em;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(79,172,254,0.08);
+        }
+
+        .tool-links a:hover { background: rgba(79,172,254,0.15); }
+
+        .tool-type {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .type-video { background: rgba(240,147,251,0.15); color: #f093fb; }
+        .type-image { background: rgba(79,172,254,0.15); color: #4facfe; }
+        .type-editing { background: rgba(245,87,108,0.15); color: #f5576c; }
+        .type-opensource { background: rgba(168,237,234,0.15); color: #a8edea; }
+        .type-audio { background: rgba(254,214,227,0.15); color: #fed6e3; }
+        .type-3d { background: rgba(255,200,100,0.15); color: #ffc864; }
+        .type-face { background: rgba(180,130,255,0.15); color: #b482ff; }
+        .type-upscale { background: rgba(100,255,180,0.15); color: #64ffb4; }
+
+        /* Submit Form */
+        .submit-section {
+            background: var(--bg-secondary);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .submit-section h2 {
+            font-size: 1.6em;
+            margin-bottom: 12px;
+        }
+
+        .submit-section p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .submit-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: var(--ssemble-gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.05em;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(102,126,234,0.4); }
+
+        /* Footer */
+        footer {
+            padding: 24px 20px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            border-top: 1px solid var(--border);
+        }
+
+        footer a { color: var(--accent-blue); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .no-results h3 { font-size: 1.3em; margin-bottom: 8px; color: var(--text-primary); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8em; }
+            .featured-card { flex-direction: column; text-align: center; padding: 24px 16px; }
+            .featured-card::before { top: 10px; right: -35px; font-size: 10px; }
+            .featured-tags, .featured-links { justify-content: center; }
+            .tools-grid { grid-template-columns: 1fr; }
+            .filter-row { justify-content: center; }
+            .result-count { margin-left: 0; width: 100%; text-align: center; margin-top: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Curated AI Image & Video Tools</h1>
+        <p>Discover 90+ carefully selected AI-powered tools for image generation, video creation, editing, and more.</p>
+        <div class="hero-badges">
+            <a href="https://github.com/awesome-ai-tools/curated-ai-image-video"><img src="https://img.shields.io/github/stars/awesome-ai-tools/curated-ai-image-video?style=flat-square&color=yellow" alt="Stars"></a>
+            <a href="https://github.com/awesome-ai-tools/curated-ai-image-video/blob/main/LICENSE"><img src="https://img.shields.io/github/license/awesome-ai-tools/curated-ai-image-video?style=flat-square" alt="License"></a>
+            <a href="https://awesome.re"><img src="https://awesome.re/badge-flat2.svg" alt="Awesome"></a>
+        </div>
+    </div>
+
+    <!-- Featured: Ssemble -->
+    <div class="featured-section">
+        <div class="featured-card">
+            <div class="featured-logo">S</div>
+            <div class="featured-content">
+                <h2><a href="https://www.ssemble.com">Ssemble AI Video Clipping</a></h2>
+                <p>The smartest way to turn long-form videos into viral short clips. AI-powered clip detection, automatic captions with 20+ templates, viral score prediction, and direct publishing to TikTok, YouTube Shorts, and Instagram Reels.</p>
+                <div class="featured-tags">
+                    <span>AI Clipping</span>
+                    <span>Auto Captions</span>
+                    <span>Viral Score</span>
+                    <span>MCP Server</span>
+                    <span>Batch Processing</span>
+                </div>
+                <div class="featured-links">
+                    <a href="https://www.ssemble.com" class="btn-primary">Visit Website</a>
+                    <a href="https://www.npmjs.com/package/@ssemble/mcp-server" class="btn-secondary">MCP Server (npm)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="controls-inner">
+            <div class="search-wrapper">
+                <span class="search-icon">&#128269;</span>
+                <input type="text" class="search-box" id="searchInput" placeholder="Search tools by name, description, or category...">
+            </div>
+            <div class="filter-row">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="video">Video Gen</button>
+                <button class="filter-btn" data-filter="editing">Editing & Clipping</button>
+                <button class="filter-btn" data-filter="image">Image Gen</button>
+                <button class="filter-btn" data-filter="image-edit">Image Editing</button>
+                <button class="filter-btn" data-filter="opensource">Open Source</button>
+                <button class="filter-btn" data-filter="audio">Audio & Music</button>
+                <button class="filter-btn" data-filter="3d">3D & Animation</button>
+                <button class="filter-btn" data-filter="face">Face & Avatar</button>
+                <button class="filter-btn" data-filter="upscale">Upscaling</button>
+                <span class="result-count" id="resultCount">Showing all tools</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="tools-section">
+        <div class="container" id="toolsContainer"></div>
+    </div>
+
+    <div class="submit-section">
+        <h2>Know a tool we're missing?</h2>
+        <p>Help us keep this list comprehensive. Submit a new AI tool suggestion through our GitHub repository.</p>
+        <a href="https://github.com/awesome-ai-tools/curated-ai-image-video/issues/new?template=tool-suggestion.yml" class="submit-btn">
+            + Submit a Tool
+        </a>
+    </div>
+
+    <footer>
+        <p>
+            <a href="https://github.com/awesome-ai-tools/curated-ai-image-video">GitHub</a> &bull;
+            <a href="https://github.com/awesome-ai-tools/curated-ai-image-video/blob/main/CONTRIBUTING.md">Contributing</a> &bull;
+            <a href="https://github.com/awesome-ai-tools/curated-ai-image-video/blob/main/LICENSE">MIT License</a>
+        </p>
+        <p style="margin-top:8px">Curated with care by the <a href="https://github.com/awesome-ai-tools">awesome-ai-tools</a> community</p>
+    </footer>
+
+    <script>
+    const tools = [
+        // Video Generation
+        { name: "Sora", url: "https://openai.com/sora", desc: "OpenAI's text-to-video and image-to-video model generating realistic scenes up to 1080p resolution.", pricing: "ChatGPT Plus/Pro", category: "video", links: [{label:"Blog", url:"https://openai.com/index/sora/"}] },
+        { name: "Runway Gen-3 Alpha", url: "https://runwayml.com", desc: "State-of-the-art video generation with fine-grained temporal control, text-to-video, and image-to-video.", pricing: "From $12/mo", category: "video", links: [{label:"Docs",url:"https://docs.runwayml.com/"},{label:"Research",url:"https://research.runwayml.com/"}] },
+        { name: "Kling AI", url: "https://klingai.com", desc: "Kuaishou's advanced text-to-video and image-to-video model producing cinematic clips up to 2 minutes.", pricing: "Free tier", category: "video", links: [] },
+        { name: "Pika", url: "https://pika.art", desc: "Creative AI video platform for generating and editing videos from text and images with style control.", pricing: "From $8/mo", category: "video", links: [{label:"Discord",url:"https://discord.gg/pika"}] },
+        { name: "Luma Dream Machine", url: "https://lumalabs.ai/dream-machine", desc: "Fast, high-quality video generation from text and images with realistic physics and motion.", pricing: "Free tier+", category: "video", links: [{label:"API",url:"https://docs.lumalabs.ai/"}] },
+        { name: "Vidu", url: "https://www.vidu.studio", desc: "AI video generation with consistent character generation and multi-scene composition.", pricing: "Free tier", category: "video", links: [] },
+        { name: "Hailuo AI (MiniMax)", url: "https://hailuoai.video", desc: "MiniMax's video generation model with strong motion quality and text adherence.", pricing: "Free tier", category: "video", links: [] },
+        { name: "Synthesia", url: "https://www.synthesia.io", desc: "Enterprise AI video platform with realistic AI avatars, 140+ languages, and custom avatar creation.", pricing: "From $22/mo", category: "video", links: [{label:"API",url:"https://docs.synthesia.io/"}] },
+        { name: "HeyGen", url: "https://www.heygen.com", desc: "AI video generation specializing in talking avatar videos for marketing, training, and communication.", pricing: "From $24/mo", category: "video", links: [{label:"API",url:"https://docs.heygen.com/"}] },
+        { name: "D-ID", url: "https://www.d-id.com", desc: "AI-powered video creation that transforms photos into talking head videos with natural speech.", pricing: "From $5.90/mo", category: "video", links: [{label:"API",url:"https://docs.d-id.com/"}] },
+        { name: "Veo 2", url: "https://deepmind.google/technologies/veo/", desc: "Google DeepMind's video generation model producing high-fidelity 1080p videos.", pricing: "Via Google Cloud", category: "video", links: [{label:"Blog",url:"https://blog.google/technology/google-labs/veo-2/"}] },
+        { name: "Pixverse", url: "https://pixverse.ai", desc: "AI video creation with text-to-video, image-to-video, and video style transfer.", pricing: "Free tier", category: "video", links: [] },
+        { name: "Haiper", url: "https://haiper.ai", desc: "AI video generation with perceptual foundation models supporting text-to-video and animation.", pricing: "Free tier", category: "video", links: [] },
+        { name: "Genmo Mochi", url: "https://www.genmo.ai", desc: "Open-source video generation with Mochi 1 model for high-quality text-to-video synthesis.", pricing: "Free tier+", category: "video", links: [{label:"GitHub",url:"https://github.com/genmoai/mochi"}] },
+
+        // Video Editing & Clipping
+        { name: "Ssemble", url: "https://www.ssemble.com", desc: "AI-powered video clipping platform that identifies the best moments from long-form videos and creates viral short-form clips with captions, hook titles, and music. Features MCP Server for programmatic access.", pricing: "Free tier+", category: "editing", featured: true, links: [{label:"MCP Server",url:"https://www.npmjs.com/package/@ssemble/mcp-server"},{label:"Website",url:"https://www.ssemble.com"}] },
+        { name: "Descript", url: "https://www.descript.com", desc: "All-in-one video editor with AI transcription, text-based editing, and AI voice cloning.", pricing: "From $24/mo", category: "editing", links: [{label:"Docs",url:"https://www.descript.com/help"}] },
+        { name: "CapCut", url: "https://www.capcut.com", desc: "ByteDance's feature-rich video editor with AI auto-captions, background removal, and effects.", pricing: "Free+", category: "editing", links: [] },
+        { name: "Opus Clip", url: "https://www.opus.pro", desc: "AI-powered tool that repurposes long videos into short viral clips with automatic reframing.", pricing: "From $19/mo", category: "editing", links: [] },
+        { name: "Vizard AI", url: "https://vizard.ai", desc: "AI video clipping tool transforming long-form content into social media-optimized clips.", pricing: "From $16/mo", category: "editing", links: [] },
+        { name: "Pictory", url: "https://pictory.ai", desc: "Converts scripts, articles, and long videos into short branded videos with AI editing.", pricing: "From $19/mo", category: "editing", links: [] },
+        { name: "Kapwing", url: "https://www.kapwing.com", desc: "Online collaborative video editor with AI auto-subtitles, smart cut, and background removal.", pricing: "From $16/mo", category: "editing", links: [{label:"Resources",url:"https://www.kapwing.com/resources"}] },
+        { name: "Riverside", url: "https://riverside.fm", desc: "High-quality recording and AI editing platform for podcasts and video.", pricing: "From $15/mo", category: "editing", links: [] },
+        { name: "Veed.io", url: "https://www.veed.io", desc: "Online video editor with AI subtitles, text-to-speech, and background removal.", pricing: "From $18/mo", category: "editing", links: [] },
+        { name: "InVideo AI", url: "https://invideo.io", desc: "AI-powered video creation from text prompts with stock footage and voiceover.", pricing: "From $25/mo", category: "editing", links: [] },
+
+        // Image Generation
+        { name: "Midjourney", url: "https://www.midjourney.com", desc: "Industry-leading AI image generation known for artistic quality and photorealism.", pricing: "From $10/mo", category: "image", links: [{label:"Docs",url:"https://docs.midjourney.com/"}] },
+        { name: "DALL-E 3", url: "https://openai.com/dall-e-3", desc: "OpenAI's image generation model with improved text rendering and prompt following.", pricing: "Via ChatGPT Plus", category: "image", links: [{label:"API",url:"https://platform.openai.com/docs/guides/images"}] },
+        { name: "Stable Diffusion 3.5", url: "https://stability.ai", desc: "Stability AI's open-weight image generation model with improved typography and quality.", pricing: "Open weights + API", category: "image", links: [{label:"HF",url:"https://huggingface.co/stabilityai"},{label:"API",url:"https://platform.stability.ai/"}] },
+        { name: "FLUX.1", url: "https://blackforestlabs.ai", desc: "Black Forest Labs' text-to-image model in Pro, Dev, and Schnell variants with excellent prompt adherence.", pricing: "Open source + API", category: "image", links: [{label:"GitHub",url:"https://github.com/black-forest-labs/flux"},{label:"HF",url:"https://huggingface.co/black-forest-labs"}] },
+        { name: "Ideogram", url: "https://ideogram.ai", desc: "AI image generation excelling at text rendering within images, logos, and typography.", pricing: "From $8/mo", category: "image", links: [] },
+        { name: "Leonardo AI", url: "https://leonardo.ai", desc: "Platform for generating production-quality visual assets with fine-tuned models.", pricing: "From $12/mo", category: "image", links: [{label:"Docs",url:"https://docs.leonardo.ai/"}] },
+        { name: "Adobe Firefly", url: "https://www.adobe.com/products/firefly.html", desc: "Adobe's generative AI model family trained on licensed content.", pricing: "With Adobe CC", category: "image", links: [{label:"API",url:"https://developer.adobe.com/firefly-services/"}] },
+        { name: "Google Imagen 3", url: "https://deepmind.google/technologies/imagen-3/", desc: "Google DeepMind's highest quality text-to-image model with photorealistic output.", pricing: "Via Google Cloud", category: "image", links: [{label:"Vertex AI",url:"https://cloud.google.com/vertex-ai/generative-ai/docs/image/overview"}] },
+        { name: "Recraft V3", url: "https://www.recraft.ai", desc: "Professional-grade AI image generation with fine control over style and brand consistency.", pricing: "Free tier+", category: "image", links: [{label:"API",url:"https://www.recraft.ai/docs"}] },
+        { name: "Playground AI", url: "https://playground.com", desc: "AI image generation and editing platform with canvas workflow and community sharing.", pricing: "From $15/mo", category: "image", links: [] },
+        { name: "Krea AI", url: "https://www.krea.ai", desc: "Real-time AI image generation and enhancement with upscaling and visual search.", pricing: "From $24/mo", category: "image", links: [] },
+        { name: "NightCafe", url: "https://nightcafe.studio", desc: "AI art generation platform with multiple AI models and community features.", pricing: "From $5.99/mo", category: "image", links: [] },
+
+        // Image Editing
+        { name: "Adobe Photoshop (Gen Fill)", url: "https://www.adobe.com/products/photoshop.html", desc: "Industry-standard image editor with AI-powered Generative Fill and neural filters.", pricing: "From $22.99/mo", category: "image-edit", links: [{label:"Features",url:"https://www.adobe.com/products/photoshop/generative-fill.html"}] },
+        { name: "Canva AI", url: "https://www.canva.com", desc: "Design platform with Magic Studio AI features including Magic Edit and Magic Eraser.", pricing: "From $12.99/mo", category: "image-edit", links: [{label:"AI Features",url:"https://www.canva.com/magic/"}] },
+        { name: "Remove.bg", url: "https://www.remove.bg", desc: "Specialized AI tool for instant, high-quality background removal from images.", pricing: "From $0.20/image", category: "image-edit", links: [{label:"API",url:"https://www.remove.bg/api"}] },
+        { name: "Clipdrop", url: "https://clipdrop.co", desc: "Stability AI's suite of AI image tools: background removal, relighting, upscaling.", pricing: "From $9/mo", category: "image-edit", links: [{label:"API",url:"https://clipdrop.co/apis"}] },
+        { name: "Magnific AI", url: "https://magnific.ai", desc: "AI image upscaler adding realistic detail when scaling images up to 16x.", pricing: "From $39/mo", category: "image-edit", links: [] },
+        { name: "Photoroom", url: "https://www.photoroom.com", desc: "AI photo editor specializing in product photography with background removal.", pricing: "From $12.99/mo", category: "image-edit", links: [{label:"API",url:"https://www.photoroom.com/api"}] },
+        { name: "Pixlr", url: "https://pixlr.com", desc: "Online photo editor with AI background removal, object removal, and batch editing.", pricing: "From $4.90/mo", category: "image-edit", links: [] },
+        { name: "Luminar Neo", url: "https://skylum.com/luminar", desc: "AI photo editor with sky replacement, portrait retouching, and generative AI tools.", pricing: "From $9.95/mo", category: "image-edit", links: [] },
+
+        // Open Source
+        { name: "Stable Diffusion XL", url: "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0", desc: "Powerful open-source text-to-image model with 1024x1024 base resolution.", pricing: "Free", category: "opensource", links: [{label:"GitHub",url:"https://github.com/Stability-AI/generative-models"}] },
+        { name: "FLUX.1 Schnell", url: "https://huggingface.co/black-forest-labs/FLUX.1-schnell", desc: "Fastest open-source text-to-image model with Apache 2.0 license.", pricing: "Free", category: "opensource", links: [{label:"GitHub",url:"https://github.com/black-forest-labs/flux"}] },
+        { name: "AnimateDiff", url: "https://github.com/guoyww/AnimateDiff", desc: "Motion module adding animation to text-to-image diffusion models.", pricing: "Free", category: "opensource", links: [{label:"Paper",url:"https://arxiv.org/abs/2307.04725"}] },
+        { name: "Stable Video Diffusion", url: "https://huggingface.co/stabilityai/stable-video-diffusion-img2vid-xt", desc: "Open-source image-to-video model generating short clips from a single image.", pricing: "Free", category: "opensource", links: [{label:"Paper",url:"https://arxiv.org/abs/2311.15127"}] },
+        { name: "CogVideoX", url: "https://github.com/THUDM/CogVideo", desc: "Tsinghua's open-source text-to-video model with strong temporal consistency.", pricing: "Free", category: "opensource", links: [{label:"HF",url:"https://huggingface.co/THUDM/CogVideoX-5b"}] },
+        { name: "Open-Sora", url: "https://github.com/hpcaitech/Open-Sora", desc: "Open-source Sora-like video generation democratizing efficient video production.", pricing: "Free", category: "opensource", links: [] },
+        { name: "Mochi 1", url: "https://github.com/genmoai/mochi", desc: "Genmo's open-source video generation with state-of-the-art motion quality.", pricing: "Free", category: "opensource", links: [{label:"HF",url:"https://huggingface.co/genmo/mochi-1-preview"}] },
+        { name: "LTX-Video", url: "https://github.com/Lightricks/LTX-Video", desc: "Open-source real-time video generation running faster than real-time on a single GPU.", pricing: "Free", category: "opensource", links: [{label:"HF",url:"https://huggingface.co/Lightricks/LTX-Video"}] },
+        { name: "HunyuanVideo", url: "https://github.com/Tencent/HunyuanVideo", desc: "Tencent's open-source video generation foundation model.", pricing: "Free", category: "opensource", links: [{label:"Paper",url:"https://arxiv.org/abs/2412.03603"}] },
+        { name: "ControlNet", url: "https://github.com/lllyasviel/ControlNet", desc: "Spatial conditioning controls for diffusion models (pose, depth, edges).", pricing: "Free", category: "opensource", links: [{label:"Paper",url:"https://arxiv.org/abs/2302.05543"}] },
+        { name: "ComfyUI", url: "https://github.com/comfyanonymous/ComfyUI", desc: "Powerful node-based GUI for diffusion model workflows with extensive plugins.", pricing: "Free", category: "opensource", links: [] },
+        { name: "Automatic1111 WebUI", url: "https://github.com/AUTOMATIC1111/stable-diffusion-webui", desc: "Popular Gradio-based web UI for Stable Diffusion with extensive extensions.", pricing: "Free", category: "opensource", links: [] },
+
+        // Audio & Music
+        { name: "Suno", url: "https://suno.com", desc: "AI music generation creating full songs with vocals, instruments, and lyrics from text.", pricing: "From $8/mo", category: "audio", links: [] },
+        { name: "Udio", url: "https://www.udio.com", desc: "AI music creation producing high-quality songs across genres from text descriptions.", pricing: "From $8/mo", category: "audio", links: [] },
+        { name: "ElevenLabs", url: "https://elevenlabs.io", desc: "Leading AI voice platform with text-to-speech, voice cloning, dubbing, and sound effects.", pricing: "From $5/mo", category: "audio", links: [{label:"API",url:"https://elevenlabs.io/docs"}] },
+        { name: "Bark", url: "https://github.com/suno-ai/bark", desc: "Open-source text-to-audio model generating speech, music, and sound effects.", pricing: "Free", category: "audio", links: [{label:"HF",url:"https://huggingface.co/suno/bark"}] },
+        { name: "MusicGen", url: "https://github.com/facebookresearch/audiocraft", desc: "Meta's open-source music generation model conditioned on text or melody.", pricing: "Free", category: "audio", links: [{label:"HF",url:"https://huggingface.co/facebook/musicgen-large"}] },
+        { name: "Stable Audio", url: "https://stableaudio.com/", desc: "Stability AI's music and sound effects generation producing 44.1kHz stereo audio.", pricing: "From $11.99/mo", category: "audio", links: [] },
+        { name: "AIVA", url: "https://www.aiva.ai", desc: "AI music composition for films, games, and creative projects.", pricing: "From $11/mo", category: "audio", links: [] },
+        { name: "Mubert", url: "https://mubert.com", desc: "AI-generated royalty-free music for content creators with real-time generation.", pricing: "From $14/mo", category: "audio", links: [{label:"API",url:"https://mubert.com/api"}] },
+
+        // 3D & Animation
+        { name: "Meshy", url: "https://www.meshy.ai", desc: "AI 3D model generation from text or images with automatic texturing.", pricing: "From $16/mo", category: "3d", links: [{label:"API",url:"https://docs.meshy.ai/"}] },
+        { name: "Tripo AI", url: "https://www.tripo3d.ai", desc: "Fast AI 3D model generation from text or single images.", pricing: "From $9.90/mo", category: "3d", links: [] },
+        { name: "Luma Genie", url: "https://lumalabs.ai/genie", desc: "Text-to-3D generation using neural radiance fields.", pricing: "Via Luma", category: "3d", links: [] },
+        { name: "Point-E", url: "https://github.com/openai/point-e", desc: "OpenAI's open-source system for generating 3D point clouds from text.", pricing: "Free", category: "3d", links: [{label:"Paper",url:"https://arxiv.org/abs/2212.08751"}] },
+        { name: "Shap-E", url: "https://github.com/openai/shap-e", desc: "OpenAI's open-source model for generating 3D objects from text or images.", pricing: "Free", category: "3d", links: [{label:"Paper",url:"https://arxiv.org/abs/2305.02463"}] },
+        { name: "Spline AI", url: "https://spline.design", desc: "3D design tool with AI-powered generation, texturing, and animation.", pricing: "From $7/mo", category: "3d", links: [] },
+        { name: "3DFY AI", url: "https://3dfy.ai", desc: "Enterprise AI platform for production-ready 3D model generation at scale.", pricing: "Enterprise", category: "3d", links: [] },
+        { name: "Kaedim", url: "https://www.kaedim3d.com", desc: "AI 2D-to-3D conversion transforming images into production-ready 3D models.", pricing: "From $29/mo", category: "3d", links: [] },
+
+        // Face & Avatar
+        { name: "HeyGen (Avatar)", url: "https://www.heygen.com", desc: "AI avatar platform with 100+ avatars, video translation in 40+ languages.", pricing: "From $24/mo", category: "face", links: [{label:"API",url:"https://docs.heygen.com/"}] },
+        { name: "Synthesia (Avatar)", url: "https://www.synthesia.io", desc: "Enterprise AI avatar platform with 230+ avatars and 140+ languages.", pricing: "From $22/mo", category: "face", links: [{label:"API",url:"https://docs.synthesia.io/"}] },
+        { name: "D-ID (Avatar)", url: "https://www.d-id.com", desc: "Transforms photos into talking head videos with natural facial animation.", pricing: "From $5.90/mo", category: "face", links: [{label:"API",url:"https://docs.d-id.com/"}] },
+        { name: "LivePortrait", url: "https://github.com/KwaiVGI/LivePortrait", desc: "Open-source portrait animation framework for controllable expression transfer.", pricing: "Free", category: "face", links: [{label:"Paper",url:"https://arxiv.org/abs/2407.03168"}] },
+        { name: "Hedra", url: "https://www.hedra.com", desc: "AI character video generation from a single photo and audio input.", pricing: "Free tier+", category: "face", links: [] },
+        { name: "Akool", url: "https://akool.com", desc: "AI face swap, talking avatar, and personalized video generation.", pricing: "From $30/mo", category: "face", links: [] },
+        { name: "Artflow AI", url: "https://www.artflow.ai", desc: "AI animated avatar and story creation with consistent character generation.", pricing: "Free tier+", category: "face", links: [] },
+
+        // Upscaling
+        { name: "Topaz Photo AI", url: "https://www.topazlabs.com/topaz-photo-ai", desc: "Professional AI image enhancer with noise reduction and upscaling up to 6x.", pricing: "$199 one-time", category: "upscale", links: [] },
+        { name: "Topaz Video AI", url: "https://www.topazlabs.com/topaz-video-ai", desc: "Professional AI video upscaler for footage up to 16K with frame interpolation.", pricing: "$299 one-time", category: "upscale", links: [] },
+        { name: "Real-ESRGAN", url: "https://github.com/xinntao/Real-ESRGAN", desc: "Open-source image/video restoration with state-of-the-art upscaling.", pricing: "Free", category: "upscale", links: [{label:"Paper",url:"https://arxiv.org/abs/2107.10833"}] },
+        { name: "Magnific AI (Upscale)", url: "https://magnific.ai", desc: "AI upscaler adding photorealistic detail when upscaling up to 16x.", pricing: "From $39/mo", category: "upscale", links: [] },
+        { name: "Upscayl", url: "https://github.com/upscayl/upscayl", desc: "Free open-source AI image upscaler available on all platforms.", pricing: "Free", category: "upscale", links: [] },
+        { name: "Waifu2x", url: "https://github.com/nagadomi/waifu2x", desc: "Classic open-source neural network for anime-style super-resolution.", pricing: "Free", category: "upscale", links: [] },
+    ];
+
+    const categoryMeta = {
+        video: { label: "Video Generation", icon: "&#127909;", type: "type-video" },
+        editing: { label: "Video Editing & Clipping", icon: "&#9988;", type: "type-editing" },
+        image: { label: "Image Generation", icon: "&#127912;", type: "type-image" },
+        "image-edit": { label: "Image Editing", icon: "&#9999;", type: "type-image" },
+        opensource: { label: "Open Source Models", icon: "&#128187;", type: "type-opensource" },
+        audio: { label: "Audio & Music", icon: "&#127925;", type: "type-audio" },
+        "3d": { label: "3D & Animation", icon: "&#127922;", type: "type-3d" },
+        face: { label: "Face & Avatar", icon: "&#129485;", type: "type-face" },
+        upscale: { label: "Upscaling & Enhancement", icon: "&#128301;", type: "type-upscale" }
+    };
+
+    const categoryOrder = ["video","editing","image","image-edit","opensource","audio","3d","face","upscale"];
+
+    let activeFilter = "all";
+    let searchTerm = "";
+
+    function renderTools() {
+        const container = document.getElementById("toolsContainer");
+        container.innerHTML = "";
+        let totalVisible = 0;
+
+        categoryOrder.forEach(cat => {
+            const meta = categoryMeta[cat];
+            let filtered = tools.filter(t => t.category === cat);
+
+            if (activeFilter !== "all" && activeFilter !== cat) return;
+
+            if (searchTerm) {
+                const s = searchTerm.toLowerCase();
+                filtered = filtered.filter(t =>
+                    t.name.toLowerCase().includes(s) ||
+                    t.desc.toLowerCase().includes(s) ||
+                    meta.label.toLowerCase().includes(s)
+                );
+            }
+
+            if (filtered.length === 0) return;
+
+            totalVisible += filtered.length;
+
+            const header = document.createElement("div");
+            header.className = "category-header";
+            header.innerHTML = '<span class="cat-icon">' + meta.icon + '</span> ' + meta.label + ' <span style="font-size:0.6em;color:var(--text-secondary);font-weight:400">(' + filtered.length + ')</span>';
+            container.appendChild(header);
+
+            const grid = document.createElement("div");
+            grid.className = "tools-grid";
+
+            filtered.forEach(tool => {
+                const card = document.createElement("a");
+                card.href = tool.url;
+                card.target = "_blank";
+                card.rel = "noopener noreferrer";
+                card.className = "tool-card" + (tool.featured ? " ssemble-card" : "");
+
+                let linksHtml = tool.links.map(l =>
+                    '<a href="' + l.url + '" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">' + l.label + '</a>'
+                ).join("");
+
+                card.innerHTML =
+                    '<span class="tool-type ' + meta.type + '">' + meta.label + '</span>' +
+                    '<div class="tool-header"><div class="tool-name">' + tool.name + (tool.featured ? ' &#11088;' : '') + '</div><div class="tool-pricing">' + tool.pricing + '</div></div>' +
+                    '<div class="tool-desc">' + tool.desc + '</div>' +
+                    (linksHtml ? '<div class="tool-links">' + linksHtml + '</div>' : '');
+
+                grid.appendChild(card);
+            });
+
+            container.appendChild(grid);
+        });
+
+        const countEl = document.getElementById("resultCount");
+        if (totalVisible === 0) {
+            container.innerHTML = '<div class="no-results"><h3>No tools found</h3><p>Try adjusting your search or filter criteria.</p></div>';
+            countEl.textContent = "No results";
+        } else {
+            countEl.textContent = "Showing " + totalVisible + " tool" + (totalVisible !== 1 ? "s" : "");
+        }
+    }
+
+    document.getElementById("searchInput").addEventListener("input", function(e) {
+        searchTerm = e.target.value;
+        renderTools();
+    });
+
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+            document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+            activeFilter = this.dataset.filter;
+            renderTools();
+        });
+    });
+
+    renderTools();
+    </script>
+</body>
+</html>

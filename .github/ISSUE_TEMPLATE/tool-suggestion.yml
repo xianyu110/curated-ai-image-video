@@ -1,0 +1,60 @@
+name: Tool Suggestion
+description: Suggest a new AI tool to add to the list
+title: "[Suggestion] "
+labels: ["suggestion"]
+body:
+  - type: input
+    id: tool-name
+    attributes:
+      label: Tool Name
+      description: The name of the AI tool
+      placeholder: e.g., Midjourney
+    validations:
+      required: true
+  - type: input
+    id: tool-url
+    attributes:
+      label: Tool URL
+      description: The official website or repository URL
+      placeholder: https://example.com
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Which category does this tool belong to?
+      options:
+        - Video Generation
+        - Video Editing & Clipping
+        - Image Generation
+        - Image Editing
+        - Open Source Models
+        - Audio & Music
+        - 3D & Animation
+        - Face & Avatar
+        - Upscaling & Enhancement
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A brief description of the tool (1-2 sentences)
+      placeholder: Describe what this tool does and why it should be included
+    validations:
+      required: true
+  - type: input
+    id: pricing
+    attributes:
+      label: Pricing
+      description: Pricing information for the tool
+      placeholder: e.g., Free tier + from $10/mo
+    validations:
+      required: true
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any additional information about why this tool should be included
